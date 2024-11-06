@@ -5,15 +5,16 @@ import PlaylistAdd from "@mui/icons-material/PlaylistAdd";
 
 
 const AddPlayListIcon = ({ movie }) => {
-  const context = useContext(MoviesContext);
+  const  { addToMustWatch } = useContext(MoviesContext);
 
-  const handleAddToFavorites = (e) => {
+  const handleAddToMustWatch  = (e) => {
     e.preventDefault();
-    context.addToFavorites(movie);
+    addToMustWatch(movie);
+    
   };
 
   return (
-    <IconButton aria-label="add to favorites" onClick={handleAddToFavorites}>
+    <IconButton aria-label="add to favorites" onClick={handleAddToMustWatch }>
       <PlaylistAdd color="primary" fontSize="large" />
     </IconButton>
   );
