@@ -7,15 +7,15 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { Link } from "react-router-dom";
-import { getMovieReviews } from "../../api/tmdb-api";
-import { excerpt } from "../../util";
+import { getTVShowReviews } from "../../api/tmdb-api"; // Ensure this function fetches TV show reviews
+import { excerpt } from "../../util"; // Reuse excerpt function
 import { useQuery } from "react-query";
 import Spinner from "../spinner";
 
-export default function MovieReviews({ movie }) {
+export default function TVShowReviews({ tvShow }) {
   const { data, error, isLoading, isError } = useQuery(
-    ["movieReviews", { id: movie.id }], // Pass queryKey as an array
-    getMovieReviews
+    ["tvShowReviews", { id: tvShow.id }],
+    getTVShowReviews // Fetch TV show reviews
   );
 
   if (isLoading) {
@@ -29,7 +29,7 @@ export default function MovieReviews({ movie }) {
   const reviews = data.results;
 
   if (reviews.length === 0) {
-    return <h3>No reviews available for this movie.</h3>;
+    return <h3>No reviews available for this TV Show.</h3>;
   }
 
   return (
@@ -49,12 +49,12 @@ export default function MovieReviews({ movie }) {
                 {r.author}
               </TableCell>
               <TableCell>{excerpt(r.content)}</TableCell>
-              <TableCell>
+              <TableCell align="right">
                 <Link
-                  to={`/reviews/${r.id}`}
+                  to={`/tvshows/reviews/${r.id}`}
                   state={{
                     review: r,
-                    movie: movie, // Pass the movie object
+                    tvShow: tvShow,
                   }}
                 >
                   Full Review

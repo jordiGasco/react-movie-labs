@@ -5,12 +5,15 @@ import HomePage from "./pages/homePage";
 import MoviePage from "./pages/movieDetailsPage";
 import FavoriteMoviesPage from "./pages/favoriteMoviesPage";
 import MovieReviewPage from "./pages/movieReviewPage";
-import SiteHeader from './components/siteHeader'
+import SiteHeader from './components/siteHeader';
 import { QueryClientProvider, QueryClient } from "react-query";
 import { ReactQueryDevtools } from 'react-query/devtools';
 import MoviesContextProvider from "./contexts/moviesContext";
 import AddMovieReviewPage from './pages/addMovieReviewPage';
 import UpcomingMoviesPage from './pages/upcomingMoviesPage';
+import TVShowsPage from './pages/tvShowsPage';
+import TVShowReviewPage from './pages/tvShowReviewPage'; // Import TVShowReviewPage
+import TVShowDetailsPage from './pages/tvShowDetailsPage'; // Import TVShowDetailsPage
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -34,6 +37,9 @@ const App = () => {
             <Route path="/reviews/form" element={ <AddMovieReviewPage /> } />
             <Route path="/movies/:id" element={<MoviePage />} />
             <Route path="/movies/upcoming" element={<UpcomingMoviesPage />} />
+            <Route path="/movies/tvshows" element={<TVShowsPage />} />
+            <Route path="/tvshows/reviews/:id" element={<TVShowReviewPage />} />
+            <Route path="/tvshows/:id" element={<TVShowDetailsPage />} />
             <Route path="/" element={<HomePage />} />
             <Route path="*" element={ <Navigate to="/" /> } />
           </Routes>
@@ -43,5 +49,5 @@ const App = () => {
     </QueryClientProvider>
   );
 };
-const rootElement = createRoot( document.getElementById("root") )
+const rootElement = createRoot(document.getElementById("root"));
 rootElement.render(<App />);
