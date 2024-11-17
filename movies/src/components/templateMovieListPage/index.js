@@ -11,10 +11,10 @@ function MovieListPageTemplate({ movies, title, action }) {
 
   let displayedMovies = movies
     .filter((m) => {
-      return m.title.toLowerCase().search(nameFilter.toLowerCase()) !== -1;
+      return m.title?.toLowerCase().search(nameFilter.toLowerCase()) !== -1; // Safeguard title
     })
     .filter((m) => {
-      return genreId > 0 ? m.genre_ids.includes(genreId) : true;
+      return genreId > 0 ? m.genre_ids?.includes(genreId) : true; // Safeguard genre_ids
     });
 
   const handleChange = (type, value) => {
@@ -27,11 +27,11 @@ function MovieListPageTemplate({ movies, title, action }) {
       <Grid size={12}>
         <Header title={title} />
       </Grid>
-      <Grid container sx={{flex: "1 1 500px"}}>
-        <Grid 
-          key="find" 
-          size={{xs: 12, sm: 6, md: 4, lg: 3, xl: 2}} 
-          sx={{padding: "20px"}}
+      <Grid container sx={{ flex: "1 1 500px" }}>
+        <Grid
+          key="find"
+          size={{ xs: 12, sm: 6, md: 4, lg: 3, xl: 2 }}
+          sx={{ padding: "20px" }}
         >
           <FilterCard
             onUserInput={handleChange}
@@ -44,4 +44,5 @@ function MovieListPageTemplate({ movies, title, action }) {
     </Grid>
   );
 }
+
 export default MovieListPageTemplate;
